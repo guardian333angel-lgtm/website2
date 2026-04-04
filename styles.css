@@ -13,6 +13,7 @@
   --glass: rgba(10, 12, 28, 0.56);
   --line: rgba(208, 218, 233, 0.28);
   --ok: #8cc6ff;
+  --rainbow-title-flow: rainbow-diagonal-flow 11s linear infinite;
 }
 
 :root {
@@ -360,7 +361,7 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%);
   background-size: 300% 300%;
   background-position: 120% 0%;
-  animation: rainbow-diagonal-flow 11s linear infinite;
+  animation: var(--rainbow-title-flow);
   text-shadow: var(--gold-outline-shadow);
 }
 
@@ -371,7 +372,7 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%);
   background-size: 300% 300%;
   background-position: 120% 0%;
-  animation: rainbow-diagonal-flow 11s linear infinite;
+  animation: var(--rainbow-title-flow);
   text-shadow: var(--gold-outline-shadow);
 }
 
@@ -380,7 +381,7 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%) !important;
   background-size: 300% 300% !important;
   background-position: 120% 0% !important;
-  animation: rainbow-diagonal-flow 11s linear infinite !important;
+  animation: var(--rainbow-title-flow) !important;
   text-shadow: none !important;
 }
 
