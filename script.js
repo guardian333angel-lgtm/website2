@@ -83,6 +83,12 @@ if (starfield) {
 
   if (!prefersReducedMotion) {
     const spawnShootingStar = () => {
+      if (document.hidden) {
+        const hiddenDelay = (isSmallScreen ? 6500 : 4600) + Math.random() * (isSmallScreen ? 3800 : 3000);
+        window.setTimeout(spawnShootingStar, hiddenDelay);
+        return;
+      }
+
       const streak = document.createElement('span');
       const startX = 68 + Math.random() * 34;
       const startY = Math.random() * 46;
@@ -128,15 +134,6 @@ const getCheckoutContext = () => {
     return null;
   }
 };
-
-const firstLoadKey = 'zenergy-first-home-load';
-const hasLoadedHomeFirst = window.sessionStorage.getItem(firstLoadKey) === '1';
-if (!hasLoadedHomeFirst) {
-  window.sessionStorage.setItem(firstLoadKey, '1');
-  if (currentPath.toLowerCase() !== 'index.html') {
-    window.location.replace('index.html');
-  }
-}
 
 const serviceTabs = document.querySelector('.tabs[aria-label="Services"]');
 if (serviceTabs) {
@@ -321,8 +318,8 @@ if (readingSubjectInput) {
     readingSubjectInput.value = subjectText;
 
     if (readingMessageInput) {
-      const dateLine = birthDate ? `Berth Date: ${birthDate}` : '';
-      const timeLine = birthTime ? `Berth Time: ${birthTime}` : '';
+      const dateLine = birthDate ? `Birth Date: ${birthDate}` : '';
+      const timeLine = birthTime ? `Birth Time: ${birthTime}` : '';
       const paymentLine = paymentMethod ? `Payment Method: ${paymentMethod}` : '';
       const payerEmailLine = payerEmail ? `Payer Email: ${payerEmail}` : '';
 
@@ -509,6 +506,10 @@ secureRequestForms.forEach((form) => {
 
 if (!prefersReducedMotion) {
   document.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
     const link = event.target instanceof Element ? event.target.closest('a') : null;
     if (!link) {
       return;

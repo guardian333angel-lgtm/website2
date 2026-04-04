@@ -721,8 +721,13 @@ a:hover {
   display: inline-grid;
   justify-items: center;
   gap: 0.42rem;
+  padding: 0;
+  border: none;
+  background: transparent;
   text-decoration: none;
   color: var(--gold-soft);
+  font: inherit;
+  cursor: pointer;
   transition: transform 0.22s ease, filter 0.22s ease;
 }
 
