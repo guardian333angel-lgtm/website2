@@ -361,7 +361,8 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%);
   background-size: 300% 300%;
   background-position: 120% 0%;
-  animation: var(--rainbow-title-flow);
+  animation: rainbow-diagonal-flow 11s linear infinite;
+  will-change: background-position;
   text-shadow: var(--gold-outline-shadow);
 }
 
@@ -372,7 +373,8 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%);
   background-size: 300% 300%;
   background-position: 120% 0%;
-  animation: var(--rainbow-title-flow);
+  animation: rainbow-diagonal-flow 11s linear infinite;
+  will-change: background-position;
   text-shadow: var(--gold-outline-shadow);
 }
 
@@ -381,7 +383,8 @@ main.shell {
   background-image: linear-gradient(135deg, #ffd66c 8%, #ff9266 24%, #ff72bd 41%, #af89ff 56%, #7dd1ff 72%, #8cffc2 88%, #ffd66c 100%) !important;
   background-size: 300% 300% !important;
   background-position: 120% 0% !important;
-  animation: var(--rainbow-title-flow) !important;
+  animation: rainbow-diagonal-flow 11s linear infinite !important;
+  will-change: background-position;
   text-shadow: none !important;
 }
 
