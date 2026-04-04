@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1>Checkout</h1></div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel panel-narrow-center text-center">
+      <h2>Your Order</h2>
+      <ul id="order-list" class="order-list"></ul>
+      <div class="order-total">Total: $<span id="order-total">0</span></div>
+
+      <h3 class="section-gap-md">Choose Payment Method</h3>
+      <div class="payment-method-stack">
+
+        <!-- Credit / Debit → routes through CashApp (no account needed) -->
+        <a id="creditbtn" href="https://cash.app/$stumpx3" target="_blank" rel="noopener noreferrer" class="reading-button payment-button-wide">
+          Credit / Debit Card
+        </a>
+        <p class="payment-credit-note">Processed securely via Cash App — no account required.</p>
+
+        <a href="https://cash.app/$stumpx3" target="_blank" rel="noopener noreferrer" class="reading-button payment-button-wide">
+          Cash App — $stumpx3
+        </a>
+
+        <a id="paypalbtn" href="#" target="_blank" rel="noopener noreferrer" class="reading-button payment-button-wide">
+          PayPal
+        </a>
+
+        <a href="https://account.venmo.com/u/stumpy303" target="_blank" rel="noopener noreferrer" class="reading-button payment-button-wide">
+          Venmo — @stumpy303
+        </a>
+      </div>
+
+      <form class="payment-request-form checkout-request-form" action="https://formsubmit.co/guardian333angel@gmail.com" method="post" data-secure-request-form>
+        <input type="hidden" name="Request Page" value="Scrolls Checkout" />
+        <label>
+          Your Email
+          <input type="email" name="Client Email" placeholder="you@example.com" required />
+        </label>
+        <button class="reading-button payment-request-send" type="submit">Send Request</button>
+      </form>
+
+      <div class="confirm-block">
+        <p class="confirm-note">Confirm your payment below to unlock your scroll downloads.</p>
+        <label class="scroll-item confirm-checkbox-line" for="payment-confirm">
+          <input type="checkbox" id="payment-confirm" />
+          I confirm payment has been sent.
+        </label>
+        <div id="download-arrow-wrap" class="download-arrow-wrap">
+          <a href="scrolls-download.html" class="quill-next-btn" aria-label="Continue to downloads">
+            <span class="spark-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const cart = JSON.parse(localStorage.getItem('scrollCart') || '[]');
+    const total = cart.length * 5;
+
+    const list = document.getElementById('order-list');
+    cart.forEach(title => {
+      const li = document.createElement('li');
+      li.className = 'order-item';
+      li.textContent = '• ' + title + ' — $5';
+      list.appendChild(li);
+    });
+
+    document.getElementById('order-total').textContent = total;
+
+    // Build PayPal link with amount
+    document.getElementById('paypalbtn').href =
+      'https://paypal.me/stumpy808/' + total;
+
+    const paymentConfirm = document.getElementById('payment-confirm');
+    const downloadArrowWrap = document.getElementById('download-arrow-wrap');
+
+    paymentConfirm.addEventListener('change', function () {
+      downloadArrowWrap.style.display = paymentConfirm.checked ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>

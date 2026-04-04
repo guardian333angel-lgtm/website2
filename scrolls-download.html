@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Your Scrolls | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1>Scrolls</h1></div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel panel-narrow-center text-center">
+      <h2>Thank You!</h2>
+      <p class="download-intro">Enter your email below and send your request so your scrolls can be delivered to you.</p>
+      <form id="scroll-email-form" class="reading-detail-form scroll-email-form">
+        <label class="subject-label">
+          Email Address
+          <input id="customer-email" type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <label class="subject-label">
+          Selected Scrolls
+          <textarea id="selected-scrolls" name="scrolls" readonly></textarea>
+        </label>
+        <button type="submit" class="reading-button mail-send-btn" aria-label="Send email request">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="mail-send-icon">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+        </button>
+      </form>
+      <p id="scroll-email-note" class="scroll-email-note">Check your email after purchase, Hadumuk! / Thank you!</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const cart = JSON.parse(localStorage.getItem('scrollCart') || '[]');
+    const form = document.getElementById('scroll-email-form');
+    const emailInput = document.getElementById('customer-email');
+    const selectedScrolls = document.getElementById('selected-scrolls');
+    const emailNote = document.getElementById('scroll-email-note');
+
+    if (cart.length === 0) {
+      form.innerHTML = '<p class="empty-scroll-message">No scrolls found. Please return to the <a class="link-gold" href="books.html">Scrolls page</a>.</p>';
+      emailNote.style.display = 'none';
+    } else {
+      selectedScrolls.value = cart.map(title => '- ' + title).join('\n');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        const subject = encodeURIComponent('Scroll PDF Request');
+        const body = encodeURIComponent(
+          'Customer Email: ' + email + '\n\nSelected Scrolls:\n' + cart.map(title => '- ' + title).join('\n')
+        );
+
+        window.location.href = 'mailto:guardian333angel@gmail.com?subject=' + subject + '&body=' + body;
+      });
+    }
+  </script>
+</body>
+</html>

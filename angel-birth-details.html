@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Angels Details | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1>Your Angels</h1><span>Enter your birth details to continue.</span></div>
+    </div>
+  </header>
+
+  <main class="shell reading-detail-shell">
+    <section class="panel">
+      <h2>Your Angels Details</h2>
+      <form class="reading-detail-form" id="angel-details-form">
+
+        <label class="subject-label">
+          Berth Date: DD/MM/YY
+          <input type="text" name="birthDate" placeholder="DD/MM/YY" required />
+        </label>
+
+        <label class="subject-label">
+          Berth Time MM:HH
+          <input type="text" name="birthTime" placeholder="MM:HH" required />
+        </label>
+
+        <button class="reading-send" type="submit" aria-label="Next">&rarr;</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const PAYMENT_CONTEXT_KEY = 'zenergyPaymentContext';
+    const detailsForm = document.getElementById('angel-details-form');
+
+    const getContext = () => {
+      try {
+        return JSON.parse(window.sessionStorage.getItem(PAYMENT_CONTEXT_KEY) || '{}');
+      } catch (error) {
+        return {};
+      }
+    };
+
+    detailsForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(detailsForm);
+      const context = getContext();
+      context.session = 'your-angels';
+      context.total = '80';
+      context.birthDate = String(formData.get('birthDate') || '').trim();
+      context.birthTime = String(formData.get('birthTime') || '').trim();
+      context.updatedAt = Date.now();
+      window.sessionStorage.setItem(PAYMENT_CONTEXT_KEY, JSON.stringify(context));
+
+      window.location.href = 'reading-detail.html?session=your-angels&total=80';
+    });
+  </script>
+</body>
+</html>

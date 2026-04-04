@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tarot Readings | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1 class="iridescent-text">Tarot Readings</h1></div>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="panel">
+      <h2 class="iridescent-text">Tarot Readings</h2>
+      <p>From knowing how to move next, or seeing who may be messing with your life, we do readings of all degrees. Readings are time based due to this. <strong>NO REFUNDS Due To The Meditation And Time Given To Readings</strong></p>
+      <div class="tarot-offers">
+        <article class="tarot-offer"><h4>10 minutes</h4><a class="reading-button" href="payment-method.html?next=reading-detail.html&amp;session=10-minutes&amp;total=20">$20</a></article>
+        <article class="tarot-offer"><h4>20 minutes</h4><a class="reading-button" href="payment-method.html?next=reading-detail.html&amp;session=20-minutes&amp;total=30">$30</a></article>
+        <article class="tarot-offer"><h4>30 minutes</h4><a class="reading-button" href="payment-method.html?next=reading-detail.html&amp;session=30-minutes&amp;total=40">$40</a></article>
+        <article class="tarot-offer tarot-offer-extended" data-base-price="70" data-session="50-minutes">
+          <h4>50 minutes</h4>
+          <label class="addon-label" for="fifty-addon-count">add 10 minutes</label>
+          <select id="fifty-addon-count" class="addon-select" data-addon-select>
+            <option value="0">0 extra (+$0)</option>
+            <option value="1">1 extra (+$20)</option>
+            <option value="2">2 extra (+$40)</option>
+            <option value="3">3 extra (+$60)</option>
+          </select>
+          <p class="addon-total">Total: <strong data-total-price>$70</strong></p>
+          <a class="reading-button" data-reading-link href="payment-method.html?next=reading-detail.html&amp;session=50-minutes&amp;addon=0&amp;total=70">$70</a>
+        </article>
+      </div>
+    </section>
+    <section class="panel">
+      <h3>Payment Methods</h3>
+      <div class="payment-row">
+        <div class="payment-method"><strong>Credit/Debit</strong><span>Card accepted at booking</span></div>
+        <div class="payment-method"><strong>Cash App</strong><a href="https://cash.app/$stumpx3" target="_blank" rel="noreferrer">$stumpx3</a></div>
+        <div class="payment-method"><strong>PayPal</strong><a href="https://paypal.me/stumpy808" target="_blank" rel="noreferrer">paypal.me/stumpy808</a></div>
+        <div class="payment-method"><strong>Venmo</strong><a href="https://account.venmo.com/u/stumpy303" target="_blank" rel="noreferrer">@stumpy303</a></div>
+      </div>
+      <form class="payment-request-form" action="https://formsubmit.co/guardian333angel@gmail.com" method="post" data-secure-request-form>
+        <input type="hidden" name="Request Page" value="Tarot Readings" />
+        <label>
+          Your Email
+          <input type="email" name="Client Email" placeholder="you@example.com" required />
+        </label>
+        <button class="reading-button payment-request-send" type="submit">Send Request</button>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

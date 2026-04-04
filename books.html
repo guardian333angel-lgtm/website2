@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrolls | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1 class="iridescent-text">Scrolls</h1></div>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="panel panel-narrow-center">
+      <h2 class="iridescent-text">Scrolls</h2>
+      <p class="scroll-intro">Each scroll $5 — select as many as you like.</p>
+      <form id="scroll-form" class="scroll-form">
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="Are You StandinG or SittinG?" data-price="5"> Are You StandinG or SittinG?</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="Diving Deeper Into The Matrix of Duality" data-price="5"> Diving Deeper Into The Matrix of Duality</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="Eternal Balance: The Art of Duality" data-price="5"> Eternal Balance: The Art of Duality</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="Self Love: The Act of Letting Yourself Feel Loved" data-price="5"> Self Love: The Act of Letting Yourself Feel Loved</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="The Greatest Show On Earth" data-price="5"> The Greatest Show On Earth</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="The Operating System of Life Pt. 1" data-price="5"> The Operating System of Life Pt. 1</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="The Operating System Of Life Pt. 2" data-price="5"> The Operating System Of Life Pt. 2</label>
+        <label class="scroll-item"><input type="checkbox" name="scroll" value="Whispers From Beyond" data-price="5"> Whispers From Beyond</label>
+      </form>
+      <div class="scroll-total">Total: $<span id="scroll-total">0</span></div>
+      <button id="checkout-btn" class="quill-next-btn" disabled>
+          <span class="spark-arrow" aria-hidden="true">&rarr;</span>
+      </button>
+      <p id="checkout-hint" class="checkout-hint">Select at least one scroll to continue.</p>
+    </section>
+    <p class="footer">Digital scrolls are delivered within minutes of confirmed payment.</p>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('scroll-form');
+    const totalEl = document.getElementById('scroll-total');
+    const btn = document.getElementById('checkout-btn');
+    const hint = document.getElementById('checkout-hint');
+
+    form.addEventListener('change', function () {
+      const checked = form.querySelectorAll('input[type="checkbox"]:checked');
+      const total = checked.length * 5;
+      totalEl.textContent = total;
+      btn.disabled = checked.length === 0;
+      hint.style.display = checked.length === 0 ? 'block' : 'none';
+    });
+
+    btn.addEventListener('click', function () {
+      const checked = form.querySelectorAll('input[type="checkbox"]:checked');
+      const selected = Array.from(checked).map(c => c.value);
+      localStorage.setItem('scrollCart', JSON.stringify(selected));
+      window.location.href = 'scrolls-checkout.html';
+    });
+  </script>
+</body>
+</html>

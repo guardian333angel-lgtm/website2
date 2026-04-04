@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy Scans | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1 class="iridescent-text">Energy Scans</h1></div>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="panel">
+      <p>From telling what chakras are misaligned to seeing if an object has a spirit attached to it, we do all kinds of energy scans!</p>
+      <div class="tarot-offers">
+        <article class="tarot-offer tarot-offer-extended" data-base-price="90" data-session="energy-scan-level" data-addon-cost="30" data-addon-max="4" data-addon-step="1" data-addon-unit="level" data-scan-level-offer>
+          <h4>Select scan level</h4>
+          <label class="addon-label" for="energy-scan-level">Choose 1 through 5</label>
+          <select id="energy-scan-level" class="addon-select" data-scan-level-select>
+            <option value="1">1 ($90)</option>
+            <option value="2">2 ($120)</option>
+            <option value="3">3 ($150)</option>
+            <option value="4">4 ($180)</option>
+            <option value="5">5 ($210)</option>
+          </select>
+          <p class="addon-total">Total: <strong data-total-price>$90</strong></p>
+          <a class="scan-next-link" data-reading-link href="payment-method.html?next=reading-detail.html&amp;session=energy-scan-level-1&amp;total=90" aria-label="Continue to scan payment details">&rarr;</a>
+        </article>
+      </div>
+    </section>
+    <section class="panel">
+      <h3>Payment Methods</h3>
+      <div class="payment-row">
+        <div class="payment-method"><strong>Credit/Debit</strong><span>Secure card option</span></div>
+        <div class="payment-method"><strong>Cash App</strong><a href="https://cash.app/$stumpx3" target="_blank" rel="noopener noreferrer">$stumpx3</a></div>
+        <div class="payment-method"><strong>PayPal</strong><a href="https://paypal.me/stumpy808" target="_blank" rel="noopener noreferrer">paypal.me/stumpy808</a></div>
+        <div class="payment-method"><strong>Venmo</strong><a href="https://account.venmo.com/u/stumpy303" target="_blank" rel="noopener noreferrer">@stumpy303</a></div>
+      </div>
+      <form class="payment-request-form" action="https://formsubmit.co/guardian333angel@gmail.com" method="post" data-secure-request-form>
+        <input type="hidden" name="Request Page" value="Energy Scans" />
+        <label>
+          Your Email
+          <input type="email" name="Client Email" placeholder="you@example.com" required />
+        </label>
+        <button class="reading-button payment-request-send" type="submit">Send Request</button>
+      </form>
+    </section>
+    <p class="footer">Scans can be performed remotely with no video required.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

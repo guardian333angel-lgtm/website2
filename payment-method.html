@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Method | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1>Payment Method</h1><span>Select a method before continuing.</span></div>
+    </div>
+  </header>
+
+  <main class="shell reading-detail-shell">
+    <section class="panel">
+      <h2>Choose Payment Method</h2>
+      <p id="amount-due" class="subject-subtext">Amount due: $0</p>
+      <form id="payment-method-form" class="reading-detail-form">
+        <label class="subject-label">
+          Your Email
+          <input type="email" name="payerEmail" placeholder="you@example.com" autocomplete="email" required />
+        </label>
+
+        <div class="method-switch" role="tablist" aria-label="Payment methods">
+          <button type="button" class="method-tab active" data-method-tab="card" role="tab" aria-selected="true">Card</button>
+          <button type="button" class="method-tab" data-method-tab="cashapp" role="tab" aria-selected="false">Cash App</button>
+          <button type="button" class="method-tab" data-method-tab="venmo" role="tab" aria-selected="false">Venmo</button>
+          <button type="button" class="method-tab" data-method-tab="paypal" role="tab" aria-selected="false">PayPal</button>
+        </div>
+
+        <section class="method-panel active" data-method-panel="card">
+          <label class="subject-label">
+            Cardholder Name
+            <input type="text" name="cardholderName" placeholder="Name on card" autocomplete="cc-name" />
+          </label>
+          <label class="subject-label">
+            Card Last 4 Digits
+            <input type="text" name="cardLast4" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="1234" />
+          </label>
+          <label class="subject-label">
+            Billing ZIP
+            <input type="text" name="billingZip" inputmode="numeric" pattern="[0-9]{5}" placeholder="ZIP code" autocomplete="postal-code" />
+          </label>
+        </section>
+
+        <section class="method-panel" data-method-panel="cashapp">
+          <label class="subject-label">
+            Cash App Tag
+            <input type="text" name="cashappTag" placeholder="$yourcashtag" />
+          </label>
+          <p class="subject-subtext">Clicking &rarr; will open Cash App to pay, then continue to your request.</p>
+        </section>
+
+        <section class="method-panel" data-method-panel="venmo">
+          <label class="subject-label">
+            Venmo Username
+            <input type="text" name="venmoUser" placeholder="@yourname" />
+          </label>
+          <p class="subject-subtext">Clicking &rarr; will open Venmo to pay, then continue to your request.</p>
+        </section>
+
+        <section class="method-panel" data-method-panel="paypal">
+          <label class="subject-label">
+            PayPal Email
+            <input type="email" name="paypalEmail" placeholder="paypal@example.com" />
+          </label>
+          <p class="subject-subtext">Clicking &rarr; will open PayPal to pay, then continue to your request.</p>
+        </section>
+
+        <button class="reading-send" type="submit" aria-label="Continue to details">&rarr;</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const PAYMENT_CONTEXT_KEY = 'zenergyPaymentContext';
+    const paymentForm = document.getElementById('payment-method-form');
+    const methodTabs = Array.from(document.querySelectorAll('[data-method-tab]'));
+    const methodPanels = Array.from(document.querySelectorAll('[data-method-panel]'));
+    const amountDue = document.getElementById('amount-due');
+    const pageParams = new URLSearchParams(window.location.search);
+
+    const sanitizeNext = (value) => {
+      if (!value) {
+        return 'reading-detail.html';
+      }
+      return /^[a-z0-9-]+\.html$/i.test(value) ? value : 'reading-detail.html';
+    };
+
+    const nextPage = sanitizeNext(pageParams.get('next'));
+    const totalRaw = Number.parseFloat(pageParams.get('total') || '0');
+    const totalAmount = Number.isFinite(totalRaw) && totalRaw > 0 ? totalRaw : 0;
+    const amountText = totalAmount % 1 === 0 ? `${totalAmount.toFixed(0)}` : `${totalAmount.toFixed(2)}`;
+    const sessionLabel = String(pageParams.get('session') || 'service').replace(/[^a-z0-9 -]/gi, ' ').trim().slice(0, 60) || 'service';
+    const carryForwardKeys = ['session', 'total', 'addon', 'addonUnit', 'addonStep'];
+
+    amountDue.textContent = `Amount due: $${amountText}`;
+
+    const getCashappUrl = () => totalAmount > 0 ? `https://cash.app/$stumpx3/${amountText}` : 'https://cash.app/$stumpx3';
+    const getPaypalUrl = () => totalAmount > 0 ? `https://paypal.me/stumpy808/${amountText}` : 'https://paypal.me/stumpy808';
+    const getVenmoUrl = () => {
+      const p = new URLSearchParams({
+        txn: 'pay',
+        recipients: 'stumpy303',
+        amount: amountText,
+        note: `Payment for ${sessionLabel}`,
+      });
+      return `https://venmo.com/?${p.toString()}`;
+    };
+
+    let activeMethod = 'card';
+
+    const setActiveMethod = (method) => {
+      activeMethod = method;
+      methodTabs.forEach((tab) => {
+        const isActive = tab.dataset.methodTab === method;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+      });
+      methodPanels.forEach((panel) => {
+        panel.classList.toggle('active', panel.dataset.methodPanel === method);
+      });
+    };
+
+    methodTabs.forEach((tab) => {
+      tab.addEventListener('click', () => setActiveMethod(tab.dataset.methodTab));
+    });
+
+    paymentForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(paymentForm);
+      const payerEmail = String(formData.get('payerEmail') || '').trim();
+      const context = {
+        paymentMethod: activeMethod,
+        payerEmail,
+        cardholderName: '',
+        cardLast4: '',
+        billingZip: '',
+        cashappTag: '',
+        venmoUser: '',
+        paypalEmail: '',
+        session: pageParams.get('session') || '',
+        total: amountText,
+        updatedAt: Date.now(),
+      };
+
+      if (activeMethod === 'card') {
+        context.cardholderName = String(formData.get('cardholderName') || '').trim();
+        context.cardLast4 = String(formData.get('cardLast4') || '').replace(/\D/g, '').slice(0, 4);
+        context.billingZip = String(formData.get('billingZip') || '').replace(/\D/g, '').slice(0, 5);
+      }
+
+      if (activeMethod === 'cashapp') {
+        context.cashappTag = String(formData.get('cashappTag') || '').trim();
+      }
+
+      if (activeMethod === 'venmo') {
+        context.venmoUser = String(formData.get('venmoUser') || '').trim();
+      }
+
+      if (activeMethod === 'paypal') {
+        context.paypalEmail = String(formData.get('paypalEmail') || '').trim();
+      }
+
+      window.sessionStorage.setItem(PAYMENT_CONTEXT_KEY, JSON.stringify(context));
+
+      const outgoing = new URLSearchParams();
+      carryForwardKeys.forEach((key) => {
+        const value = pageParams.get(key);
+        if (value) {
+          outgoing.set(key, value);
+        }
+      });
+
+      if (!outgoing.get('session') && context.session) {
+        outgoing.set('session', context.session);
+      }
+      if (!outgoing.get('total') && totalAmount > 0) {
+        outgoing.set('total', amountText);
+      }
+
+      const query = outgoing.toString();
+      const next = query ? `${nextPage}?${query}` : nextPage;
+
+      if (activeMethod === 'cashapp') {
+        window.open(getCashappUrl(), '_blank', 'noopener,noreferrer');
+      } else if (activeMethod === 'venmo') {
+        window.open(getVenmoUrl(), '_blank', 'noopener,noreferrer');
+      } else if (activeMethod === 'paypal') {
+        window.open(getPaypalUrl(), '_blank', 'noopener,noreferrer');
+      }
+
+      window.location.href = next;
+    });
+  </script>
+</body>
+</html>
