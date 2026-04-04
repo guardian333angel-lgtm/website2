@@ -410,6 +410,14 @@ main.shell {
   box-shadow: 0 0 10px rgba(245, 204, 122, 0.34), 0 0 20px rgba(131, 206, 255, 0.22), inset 0 0 10px rgba(244, 205, 125, 0.18);
 }
 
+.home-page .card h4 {
+  display: inline-block;
+  padding: 0.14rem 0.34rem 0.2rem;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(245, 204, 122, 0.2), 0 0 20px rgba(131, 206, 255, 0.14), inset 0 0 8px rgba(244, 205, 125, 0.1);
+  animation: var(--rainbow-title-flow), service-title-glow 5.4s ease-in-out infinite;
+}
+
 .panel p,
 .card p,
 .payment-method,
@@ -461,6 +469,22 @@ main.shell {
   }
   100% {
     background-position: -120% 100%;
+  }
+}
+
+@keyframes service-title-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(245, 204, 122, 0.2), 0 0 20px rgba(131, 206, 255, 0.14), inset 0 0 8px rgba(244, 205, 125, 0.1);
+    filter: drop-shadow(0 0 6px rgba(245, 204, 122, 0.18)) drop-shadow(0 0 10px rgba(131, 206, 255, 0.12));
+  }
+  35% {
+    box-shadow: 0 0 12px rgba(255, 146, 102, 0.22), 0 0 24px rgba(255, 114, 189, 0.16), inset 0 0 8px rgba(255, 214, 108, 0.14);
+    filter: drop-shadow(0 0 7px rgba(255, 146, 102, 0.2)) drop-shadow(0 0 12px rgba(255, 114, 189, 0.14));
+  }
+  68% {
+    box-shadow: 0 0 12px rgba(125, 209, 255, 0.24), 0 0 24px rgba(140, 255, 194, 0.16), inset 0 0 8px rgba(255, 214, 108, 0.12);
+    filter: drop-shadow(0 0 8px rgba(125, 209, 255, 0.2)) drop-shadow(0 0 12px rgba(140, 255, 194, 0.14));
   }
 }
 
