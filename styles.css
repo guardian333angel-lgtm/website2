@@ -713,6 +713,101 @@ a:hover {
   transform: translateY(-2px) scale(1.02);
 }
 
+.tht-book-fab {
+  position: fixed;
+  right: 1.15rem;
+  bottom: 0.95rem;
+  z-index: 35;
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.42rem;
+  text-decoration: none;
+  color: var(--gold-soft);
+  transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+.tht-book-fab-shape {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 3.7rem;
+  border-radius: 0.4rem 0.95rem 0.95rem 0.4rem;
+  border: 1px solid rgba(227, 195, 128, 0.68);
+  background:
+    linear-gradient(180deg, rgba(70, 33, 10, 0.96) 0%, rgba(42, 19, 8, 0.96) 52%, rgba(25, 11, 6, 0.98) 100%);
+  box-shadow:
+    0 14px 24px rgba(0, 0, 0, 0.42),
+    0 0 18px rgba(225, 183, 107, 0.22),
+    inset 0 1px 0 rgba(255, 223, 165, 0.28),
+    inset -8px 0 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.tht-book-fab-shape::before {
+  content: "";
+  position: absolute;
+  inset: 0.28rem 0.32rem 0.28rem 0.75rem;
+  border-radius: 0.18rem 0.72rem 0.72rem 0.18rem;
+  border: 1px solid rgba(245, 218, 167, 0.2);
+  background: linear-gradient(180deg, rgba(138, 72, 30, 0.12), rgba(0, 0, 0, 0.18));
+}
+
+.tht-book-fab-spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.92rem;
+  border-right: 1px solid rgba(250, 220, 166, 0.24);
+  background:
+    linear-gradient(180deg, rgba(112, 56, 23, 0.98) 0%, rgba(78, 34, 14, 0.98) 100%);
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.24);
+}
+
+.tht-book-fab-pages {
+  position: absolute;
+  right: 0.2rem;
+  top: 0.42rem;
+  bottom: 0.42rem;
+  width: 0.34rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: linear-gradient(180deg, rgba(245, 229, 200, 0.95) 0%, rgba(220, 197, 160, 0.92) 100%);
+  box-shadow: inset 1px 0 0 rgba(123, 90, 54, 0.25);
+}
+
+.tht-book-fab-title {
+  position: relative;
+  z-index: 1;
+  margin-left: 0.48rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: #f3d89e;
+  text-shadow: 0 0 10px rgba(248, 208, 131, 0.35), 0 0 18px rgba(121, 204, 255, 0.18);
+}
+
+.tht-book-fab-label {
+  font-size: 0.98rem;
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 10px rgba(244, 210, 143, 0.42);
+}
+
+.tht-book-fab:hover,
+.tht-book-fab:focus-visible {
+  transform: translateY(-3px) scale(1.03);
+  filter: saturate(1.08);
+}
+
+.tht-book-fab:hover .tht-book-fab-shape,
+.tht-book-fab:focus-visible .tht-book-fab-shape {
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.46),
+    0 0 24px rgba(225, 183, 107, 0.3),
+    inset 0 1px 0 rgba(255, 223, 165, 0.34),
+    inset -8px 0 14px rgba(0, 0, 0, 0.22);
+}
+
 .contact-me-fab {
   position: fixed;
   right: 1.15rem;
@@ -1610,6 +1705,25 @@ a:hover {
     bottom: 0.72rem;
     padding: 0.62rem 0.88rem;
     font-size: 1.1rem;
+  }
+
+  .tht-book-fab {
+    right: 0.72rem;
+    bottom: 0.72rem;
+    gap: 0.35rem;
+  }
+
+  .tht-book-fab-shape {
+    width: 3.95rem;
+    height: 3.25rem;
+  }
+
+  .tht-book-fab-title {
+    font-size: 0.98rem;
+  }
+
+  .tht-book-fab-label {
+    font-size: 0.88rem;
   }
 
   .contact-me-fab {
