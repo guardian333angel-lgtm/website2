@@ -1,6 +1,27 @@
 const starfield = document.querySelector('.starfield');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+if (!prefersReducedMotion) {
+  let iridescentRafId = null;
+
+  const syncIridescentScroll = () => {
+    iridescentRafId = null;
+    const scrollShift = Math.round(window.scrollY * 0.18);
+    document.documentElement.style.setProperty('--iridescent-scroll-shift', `${scrollShift}px`);
+  };
+
+  const requestIridescentSync = () => {
+    if (iridescentRafId !== null) {
+      return;
+    }
+    iridescentRafId = window.requestAnimationFrame(syncIridescentScroll);
+  };
+
+  window.addEventListener('scroll', requestIridescentSync, { passive: true });
+  window.addEventListener('resize', requestIridescentSync);
+  requestIridescentSync();
+}
+
 if (starfield) {
   const isSmallScreen = window.innerWidth < 700;
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
@@ -115,8 +136,24 @@ if (starfield) {
   }
 }
 
+const normalizePageName = (value) => {
+  const raw = String(value || '').trim().toLowerCase();
+  if (!raw) {
+    return 'index.html';
+  }
+
+  const cleaned = raw.split('?')[0].split('#')[0].replace(/^\.\//, '').replace(/^\/+/, '');
+  if (!cleaned || !cleaned.includes('.')) {
+    return 'index.html';
+  }
+
+  return cleaned;
+};
+
 const links = document.querySelectorAll('[data-nav]');
-const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+const currentPath = normalizePageName(window.location.pathname.split('/').pop());
+const isHomePage = currentPath === 'index.html';
+const isContactPage = currentPath === 'contact.html';
 const checkoutContextKey = 'zenergyPaymentContext';
 
 const getCheckoutContext = () => {
@@ -178,7 +215,7 @@ if (serviceTabs) {
     .forEach((link) => serviceTabs.appendChild(link));
 }
 
-if (currentPath === 'index.html' && !document.querySelector('.home-ankh')) {
+if (isHomePage && !document.querySelector('.home-ankh')) {
   const homeAnkh = document.createElement('a');
   homeAnkh.className = 'home-ankh';
   homeAnkh.href = 'index.html';
@@ -188,13 +225,13 @@ if (currentPath === 'index.html' && !document.querySelector('.home-ankh')) {
 }
 
 links.forEach((link) => {
-  const href = link.getAttribute('href');
+  const href = normalizePageName(link.getAttribute('href'));
   if (href === currentPath) {
     link.classList.add('active');
   }
 });
 
-if (currentPath !== 'index.html' && !document.querySelector('.home-scarab')) {
+if (!isHomePage && !document.querySelector('.home-scarab')) {
   const scarabFab = document.createElement('a');
   scarabFab.className = 'home-scarab';
   scarabFab.href = 'index.html';
@@ -203,13 +240,32 @@ if (currentPath !== 'index.html' && !document.querySelector('.home-scarab')) {
   document.body.appendChild(scarabFab);
 }
 
-if (currentPath !== 'contact.html' && !document.querySelector('.contact-me-fab')) {
+if (!isContactPage && !document.querySelector('.contact-me-fab')) {
   const contactFab = document.createElement('a');
   contactFab.className = 'contact-me-fab';
   contactFab.href = 'contact.html';
   contactFab.textContent = 'Contact Me';
   contactFab.setAttribute('aria-label', 'Open contact form');
   document.body.appendChild(contactFab);
+}
+
+if (isHomePage) {
+  const homeServiceCards = document.querySelectorAll('.home-page .grid .card');
+  homeServiceCards.forEach((card) => {
+    const title = card.querySelector('.home-rainbow-title');
+    const arrowLink = card.querySelector('.portal-button');
+    if (!title || !arrowLink) {
+      return;
+    }
+
+    card.classList.add('home-service-card');
+    title.classList.add('home-service-title', 'iridescent-text');
+    arrowLink.classList.add('home-service-arrow');
+
+    if (title.nextElementSibling !== arrowLink) {
+      card.insertBefore(arrowLink, title.nextSibling);
+    }
+  });
 }
 
 const addonSelectors = document.querySelectorAll('[data-addon-select]');
