@@ -20,6 +20,27 @@ if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($remote)) {
 
 git add .
 
+$oversized = git ls-files | ForEach-Object {
+  $itemPath = Join-Path $repoRoot $_
+  if (Test-Path $itemPath) {
+    $item = Get-Item $itemPath
+    if (-not $item.PSIsContainer -and $item.Length -gt 100MB) {
+      [PSCustomObject]@{
+        Path = $_
+        SizeMB = [Math]::Round($item.Length / 1MB, 2)
+      }
+    }
+  }
+} | Where-Object { $_ }
+
+if ($oversized) {
+  Write-Host 'Cannot publish: GitHub blocks files larger than 100 MB in standard git pushes.' -ForegroundColor Red
+  $oversized | ForEach-Object {
+    Write-Host (" - {0} ({1} MB)" -f $_.Path, $_.SizeMB) -ForegroundColor Yellow
+  }
+  throw 'Remove or shrink oversized files, then publish again.'
+}
+
 $changes = git status --porcelain
 if ([string]::IsNullOrWhiteSpace(($changes | Out-String)) -and -not $AllowEmpty) {
   Write-Host 'No local changes to publish.'
@@ -37,7 +58,7 @@ if ($LASTEXITCODE -ne 0) {
 
 git push
 if ($LASTEXITCODE -ne 0) {
-  throw 'Git push failed.'
+  throw 'Git push failed. Check network/auth and ensure no files exceed 100 MB.'
 }
 
 Write-Host 'Publish complete.'
