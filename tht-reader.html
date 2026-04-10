@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THT Reader | Zenergy Healing Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="cosmic-room"></div>
+  <div class="starfield" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="shell">
+      <div class="brand"><h1 class="iridescent-text">THT Reader</h1></div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel panel-narrow-center tht-reader-panel">
+      <h2 class="iridescent-text">The Operating System Of Life</h2>
+      <p class="tht-reader-intro">Read your THT book directly in your browser.</p>
+
+      <div class="pdf-reader-wrap" role="region" aria-label="THT PDF reader">
+        <iframe
+          class="pdf-reader-frame"
+          src="pdfs/The%20Operating%20System%20Of%20Life_%20OS%20Life%20v.pdf#view=FitH"
+          title="The Operating System Of Life PDF"
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <p class="tht-reader-fallback">
+        If the reader does not appear, open the PDF directly:
+        <a class="link-gold" href="pdfs/The%20Operating%20System%20Of%20Life_%20OS%20Life%20v.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
