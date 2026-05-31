@@ -1745,8 +1745,8 @@ a:hover {
 .payment-button-wide {
   width: 260px;
   text-align: center;
-  font-size: 1.35rem;
-  padding: 0.55rem 1rem;
+  font-size: 1.15rem;
+  padding: 0.45rem 0.8rem;
 }
 
 .payment-credit-note {
