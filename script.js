@@ -193,7 +193,6 @@ if (serviceTabs) {
     'Oracle Readings',
     'Shadow Work',
     'Spiritual Court Sessions',
-    'Tarot Readings',
   ];
 
   const rank = new Map(preferredOrder.map((label, index) => [label, index]));
