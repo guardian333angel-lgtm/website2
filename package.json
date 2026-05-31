@@ -1,0 +1,19 @@
+{
+  "name": "website2",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint:js": "eslint --ext .js .",
+    "lint:css": "stylelint \"**/*.css\"",
+    "format": "prettier --write \"**/*.{js,css,html,md}\"",
+    "lint": "npm run lint:js && npm run lint:css"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-html": "^6.2.0",
+    "prettier": "^2.8.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-standard": "^29.0.0"
+  }
+}

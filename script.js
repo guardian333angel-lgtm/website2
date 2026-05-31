@@ -22,6 +22,61 @@ if (!prefersReducedMotion) {
   requestIridescentSync();
 }
 
+/* Bottom back-page symbol: appears when user scrolls to the bottom of the page */
+(function setupBottomBackSymbol() {
+  try {
+    if (typeof isHomePage !== 'undefined' && isHomePage) {
+      return;
+    }
+    const el = document.createElement('a');
+    el.className = 'bottom-back-symbol';
+    el.href = '#';
+    el.setAttribute('aria-label', 'Go back');
+    el.innerText = '𓆃';
+
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    // append to body and set explicit fixed positioning styles to avoid transform-containment issues
+    el.style.position = 'fixed';
+    el.style.left = '50%';
+    el.style.bottom = '18px';
+    el.style.transform = 'translate3d(-50%, 14px, 0)';
+    el.style.zIndex = '9999';
+    document.body.appendChild(el);
+
+    let ticking = false;
+    const checkBottom = () => {
+      const nearBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 64);
+      if (nearBottom) {
+        el.classList.add('visible');
+      } else {
+        el.classList.remove('visible');
+      }
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(checkBottom);
+      }
+    }, { passive: true });
+
+    // also react to resize and initial state
+    window.addEventListener('resize', () => { requestAnimationFrame(checkBottom); }, { passive: true });
+    requestAnimationFrame(checkBottom);
+  } catch (err) {
+    // fail quietly
+  }
+})();
+
 if (starfield) {
   const isSmallScreen = window.innerWidth < 700;
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
