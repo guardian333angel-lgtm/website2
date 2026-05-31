@@ -1067,15 +1067,15 @@ a:hover {
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
-  border: 1.5px solid rgb(0 191 255 / 55%);
+  border: 1.5px solid rgb(116 255 164 / 55%);
   background: radial-gradient(circle, rgb(0 28 48 / 92%) 0%, rgb(0 12 30 / 95%) 100%);
-  color: #00bfff;
+  color: #5cff9c;
   text-decoration: none;
   font-family: "Noto Sans Egyptian Hieroglyphs", serif;
   font-size: 1.7rem;
   line-height: 1;
-  box-shadow: 0 0 12px rgb(0 191 255 / 70%), 0 0 28px rgb(0 191 255 / 45%), 0 0 52px rgb(0 191 255 / 22%);
-  text-shadow: 0 0 8px rgb(0 191 255 / 90%), 0 0 18px rgb(0 191 255 / 65%), 0 0 32px rgb(0 191 255 / 40%);
+  box-shadow: 0 0 12px rgb(92 255 156 / 70%), 0 0 28px rgb(92 255 156 / 45%), 0 0 52px rgb(92 255 156 / 22%);
+  text-shadow: 0 0 8px rgb(92 255 156 / 90%), 0 0 18px rgb(92 255 156 / 65%), 0 0 32px rgb(92 255 156 / 40%);
   backdrop-filter: blur(4px);
   animation: scarab-glow 3s ease-in-out infinite;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -1084,20 +1084,20 @@ a:hover {
 .home-scarab:hover,
 .home-scarab:focus-visible {
   transform: translateX(-50%) scale(1.1);
-  box-shadow: 0 0 18px rgb(0 191 255 / 90%), 0 0 38px rgb(0 191 255 / 60%), 0 0 64px rgb(0 191 255 / 30%);
+  box-shadow: 0 0 18px rgb(92 255 156 / 90%), 0 0 38px rgb(92 255 156 / 60%), 0 0 64px rgb(92 255 156 / 30%);
 }
 
 @keyframes scarab-glow {
   0%,
   100% {
-    box-shadow: 0 0 12px rgb(0 191 255 / 70%), 0 0 28px rgb(0 191 255 / 45%), 0 0 52px rgb(0 191 255 / 22%);
-    text-shadow: 0 0 8px rgb(0 191 255 / 90%), 0 0 18px rgb(0 191 255 / 65%), 0 0 32px rgb(0 191 255 / 40%);
-    color: #00bfff;
+    box-shadow: 0 0 12px rgb(92 255 156 / 70%), 0 0 28px rgb(92 255 156 / 45%), 0 0 52px rgb(92 255 156 / 22%);
+    text-shadow: 0 0 8px rgb(92 255 156 / 90%), 0 0 18px rgb(92 255 156 / 65%), 0 0 32px rgb(92 255 156 / 40%);
+    color: #5cff9c;
   }
 
   50% {
-    box-shadow: 0 0 20px rgb(0 220 255 / 85%), 0 0 44px rgb(0 191 255 / 60%), 0 0 72px rgb(0 191 255 / 32%);
-    text-shadow: 0 0 14px rgb(0 220 255 / 100%), 0 0 28px rgb(0 191 255 / 80%), 0 0 48px rgb(0 191 255 / 50%);
+    box-shadow: 0 0 20px rgb(92 255 156 / 85%), 0 0 44px rgb(92 255 156 / 60%), 0 0 72px rgb(92 255 156 / 32%);
+    text-shadow: 0 0 14px rgb(92 255 156 / 100%), 0 0 28px rgb(92 255 156 / 80%), 0 0 48px rgb(92 255 156 / 50%);
     color: #7ee8ff;
   }
 }
